@@ -18,9 +18,10 @@
 # This script is copied from https://github.com/wvanbesien/regionalSettings and modified
 # by setting $location as a parameter.
 
+[CmdletBinding()]
 param(
-    [string]$lng,
-    [int]$location
+    [string]$lng = 'en_US',
+    [int]$location = 244
 )
 
 if (-not [System.Environment]::Is64BitProcess)
@@ -50,19 +51,18 @@ if (-not [System.Environment]::Is64BitProcess)
     exit $exitCode
 }
 
-Start-Transcript -Path "C:\Windows\Temp\SetLanguage.log" | Out-Null
+Start-Transcript -Path "C:\Temp\SetLanguage.log" | Out-Null
 
 #$lng = "en-AU"
-$outFile = "C:\Windows\Temp\Lng.xml"
+$outFile = "C:\Temp\Lng.xml"
 #https://docs.microsoft.com/en-au/windows/desktop/Intl/table-of-geographical-locations
 #$location = 12
 
 Write-Host "Set language: $lng"
 Write-Host "Language file: $outFile"
+Write-Host "Set location: $location"
 
 Set-WinSystemLocale $lng
-
-Write-Host "Set location: $location"
 Set-WinHomeLocation $location
 
 $lngList = New-WinUserLanguageList $lng
