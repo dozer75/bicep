@@ -15,6 +15,7 @@ It:
   - See [Geographical location identifier (decimal)](https://docs.microsoft.com/en-au/windows/win32/intl/table-of-geographical-locations) for valid values
 - Installs and configures the self-hosted integration runtime with the specified ```AuthKey```
   - Get the ```AuthKey``` from your DataFactory Self-Hosted integration runtime.
+- Installs Microsoft OpenJDK 11
 
 ### SetLangAndLocation.ps1
 

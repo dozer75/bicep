@@ -40,6 +40,13 @@ Invoke-WebRequest https://raw.githubusercontent.com/dozer75/bicep/master/virtual
 
 Invoke-WebRequest https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/quickstarts/microsoft.compute/vms-with-selfhost-integration-runtime/gatewayInstall.ps1 -OutFile C:\Temp\gatewayInstall.ps1
 
+Invoke-WebRequest https://aka.ms/download-jdk/microsoft-jdk-11.0.15-windows-x64.msi -OutFile C:\Temp\micorosft-jdk-11.msi
+
+# Configures language and location settings for the server
 & C:\Temp\SetLangAndLocation.ps1 -lng $Language -location $Location
 
+# Installs the Data Factory Integrated Service gateway
 & C:\Temp\gatewayInstall.ps1 -gatewayKey $AuthKey
+
+# Installs Microsoft OpenJDK for Parquet handling
+Start-Process 'msiexec.exe' -ArgumentList '-i C:\Temp\micorosft-jdk-11.msi ADDLOCAL=FeatureMain,FeatureEnvironment,FeatureJarFileRunWith,FeatureJavaHome INSTALLDIR="c:\Program Files\Microsoft\" /quiet' -Wait -NoNewWindow
